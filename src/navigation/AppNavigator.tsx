@@ -16,9 +16,6 @@ export const AppNavigator = () => {
         screenOptions={{
           headerShown: false,
           animation: 'slide_from_right',
-          contentStyle: {
-            backgroundColor: 'white',
-          },
         }}>
         <Stack.Screen name={ROUTES.home} component={HomeScreen} />
         <Stack.Screen
