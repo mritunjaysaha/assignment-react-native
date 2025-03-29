@@ -2,7 +2,7 @@ import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {ROUTES} from '../constants/routes';
 import {HomeScreen} from '../screens/HomeScreen';
-import {CreateArticleFormScreen} from '../screens/CreateArticleFormScreen';
+import {CreateArticleFormScreen} from '../screens/CreateArticleFormScreen/CreateArticleFormScreen';
 import {CreateBusinessFormScreen} from '../screens/CreateBusinessFormScreen/CreateBusinessFormScreen';
 import {BusinessListScreen} from '../screens/BusinessListScreen';
 
