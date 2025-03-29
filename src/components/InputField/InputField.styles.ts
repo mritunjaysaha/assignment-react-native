@@ -5,7 +5,6 @@ export const InputFieldStyles = StyleSheet.create({
     gap: 10,
 
     width: '100%',
-    paddingHorizontal: 12,
   },
 
   input: {
