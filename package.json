@@ -10,13 +10,28 @@
     "test": "jest"
   },
   "dependencies": {
+    "@react-native-async-storage/async-storage": "^1.24.0",
     "@react-navigation/elements": "^2.3.1",
     "@react-navigation/native": "^7.0.19",
     "@react-navigation/native-stack": "^7.3.3",
+    "pouchdb-adapter-http": "^9.0.0",
+    "pouchdb-adapter-react-native-sqlite": "^4.0.5",
+    "pouchdb-browser": "^9.0.0",
+    "pouchdb-core": "^9.0.0",
+    "pouchdb-mapreduce": "^9.0.0",
+    "pouchdb-replication": "^9.0.0",
     "react": "19.0.0",
     "react-native": "0.78.1",
+    "react-native-nitro-modules": "^0.25.2",
+    "react-native-nitro-sqlite": "^9.1.7",
+    "react-native-quick-sqlite": "^8.2.7",
+    "react-native-quick-websql": "^0.3.0",
     "react-native-safe-area-context": "^5.3.0",
-    "react-native-screens": "^4.10.0"
+    "react-native-screens": "^4.10.0",
+    "react-native-sqlite-2": "^3.6.2",
+    "react-native-sqlite-storage": "^6.0.1",
+    "rxdb": "^16.8.1",
+    "rxjs": "^7.8.2"
   },
   "devDependencies": {
     "@babel/core": "^7.25.2",

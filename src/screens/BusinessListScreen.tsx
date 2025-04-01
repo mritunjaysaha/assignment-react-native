@@ -3,7 +3,7 @@ import {StyleSheet, Text, View} from 'react-native';
 export const BusinessListScreen = () => {
   return (
     <View style={styles.container}>
-      <Text>Business Screen</Text>
+      <Text>Create Business</Text>
     </View>
   );
 };
