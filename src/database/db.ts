@@ -1,53 +1,47 @@
-import {createRxDatabase} from 'rxdb';
-import {
-  getRxStorageSQLiteTrial,
-  getSQLiteBasicsQuickSQLite,
-} from 'rxdb/plugins/storage-sqlite';
-import {open} from 'react-native-nitro-sqlite';
+import SQLite from 'react-native-sqlite-storage';
 
-import {businessSchema} from './models/businessModel';
-import {articleSchema} from './models/articleModel';
+const db = SQLite.openDatabase(
+  {name: 'test-db', location: 'default'},
+  () => console.log('Database opened successfully'),
+  error => console.error('Error opening database:', error),
+);
 
 export const createDatabase = async () => {
-  try {
-    const database = await createRxDatabase({
-      name: 'assignment10-db',
-      multiInstance: false,
-      ignoreDuplicate: true,
-      storage: getRxStorageSQLiteTrial({
-        sqliteBasics: getSQLiteBasicsQuickSQLite(open),
-      }),
-    });
+  return new Promise((resolve, reject) => {
+    db.transaction(
+      tx => {
+        // Create Businesses table
+        tx.executeSql(
+          `CREATE TABLE IF NOT EXISTS businesses (
+          id INTEGER PRIMARY KEY AUTOINCREMENT,
+          name TEXT NOT NULL,
+          address TEXT
+        );`,
+          [],
+          () => console.log('Businesses table created successfully'),
+          error => console.error('Error creating businesses table:', error),
+        );
 
-    console.log('Database created successfully:', database);
-
-    console.log('Business Schema:', businessSchema);
-    console.log('Article Schema:', articleSchema);
-
-    try {
-      const collections = await database.addCollections({
-        businesses: {schema: businessSchema},
-        articles: {schema: articleSchema},
-      });
-      console.log('Collections added successfully:', collections);
-    } catch (collectionError) {
-      console.error(
-        'Error adding collections:',
-        collectionError instanceof Error
-          ? collectionError.stack
-          : collectionError,
-      );
-      throw collectionError instanceof Error
-        ? collectionError
-        : new Error(String(collectionError));
-    }
-
-    return database;
-  } catch (dbError) {
-    console.error(
-      'Error creating database:',
-      dbError instanceof Error ? dbError.stack : dbError,
+        // Create Articles table
+        tx.executeSql(
+          `CREATE TABLE IF NOT EXISTS articles (
+          id INTEGER PRIMARY KEY AUTOINCREMENT,
+          title TEXT NOT NULL,
+          content TEXT
+        );`,
+          [],
+          () => console.log('Articles table created successfully'),
+          error => console.error('Error creating articles table:', error),
+        );
+      },
+      error => {
+        console.error('Transaction error:', error);
+        reject(error);
+      },
+      () => {
+        console.log('Database setup completed');
+        resolve(db);
+      },
     );
-    throw dbError instanceof Error ? dbError : new Error(String(dbError)); // Ensure the error is an instance of Error
-  }
+  });
 };

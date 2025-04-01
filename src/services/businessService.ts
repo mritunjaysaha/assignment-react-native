@@ -1,17 +1,38 @@
-// Function to Add a New Business
-export async function addBusiness(db, name) {
-  await db.businesses.insert({id: Date.now().toString(), name});
+export function addBusiness(db, name) {
+  return new Promise((resolve, reject) => {
+    db.transaction(tx => {
+      tx.executeSql(
+        'INSERT INTO businesses (name) VALUES (?);',
+        [name],
+        (_, results) => resolve(results),
+        (_, error) => reject(error),
+      );
+    });
+  });
 }
 
-// Function to Get All Businesses
-export async function getBusinesses(db) {
-  return await db.businesses.find().exec();
+export function getBusinesses(db) {
+  return new Promise((resolve, reject) => {
+    db.transaction(tx => {
+      tx.executeSql(
+        'SELECT * FROM businesses;',
+        [],
+        (_, results) => resolve(results.rows.raw()),
+        (_, error) => reject(error),
+      );
+    });
+  });
 }
 
-// Function to Delete a Business
-export async function deleteBusiness(db, id) {
-  const business = await db.businesses.findOne({selector: {id}}).exec();
-  if (business) {
-    await business.remove();
-  }
+export function deleteBusiness(db, id) {
+  return new Promise((resolve, reject) => {
+    db.transaction(tx => {
+      tx.executeSql(
+        'DELETE FROM businesses WHERE id = ?;',
+        [id],
+        (_, results) => resolve(results),
+        (_, error) => reject(error),
+      );
+    });
+  });
 }

@@ -5,7 +5,6 @@ import {AppNavigator} from './src/navigation/AppNavigator';
 import {DatabaseProvider} from './src/context/DatabaseContext/DatabaseContext';
 import {createDatabase} from './src/database/db';
 import {RxDatabase, RxCollection} from 'rxdb';
-import {Text, View} from 'react-native';
 
 function App(): React.JSX.Element {
   const [db, setDB] = useState<RxDatabase<
